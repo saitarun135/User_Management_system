@@ -23,29 +23,44 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        switch($this->method()){
-            case 'POST' :
+        switch ($this->method()) {
+            case 'POST' && ($this->route()->uri() == 'login'):
                 return [
-                    'name' => ['required','string'],
-                    'email' => ['required','email'],
-                    'password'=> ['required']
+                    'email' => ['required', 'email'],
+                    'password' => ['required'],
                 ];
-            case 'GET' :
+            case 'POST':
+                return [
+                    'name' => ['required', 'string'],
+                    'email' => ['required', 'email', 'unique:users,email'],
+                    'password' => ['required'],
+                ];
+
+            case 'GET':
                 return [
 
                 ];
-            default :
+            default:
                 return [];
         }
     }
 
     public function messages()
     {
-        return [
-            'name.required' => 'please provide :attribute ',
-            'name.string' => 'please enter valid string',
-            'email.required' => ':attribute is missing please enter',
-            'email.email' => 'please enter valid :attribute address'
-        ];
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'name.required' => 'please provide :attribute ',
+                    'name.string' => 'please enter valid string',
+                    'email.required' => ':attribute is missing please enter',
+                    'email.email' => 'please enter valid :attribute address',
+                    'email.unique' => ':attribute already taken',
+                ];
+            case 'POST' && ($this->route()->uri() == 'login'):
+                return [
+                    'email.required' => ':attribute field is mandatory',
+                    'password' => 'Password is mandatory'
+                ];
+        }
     }
 }

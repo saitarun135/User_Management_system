@@ -14,10 +14,10 @@ class UserController extends Controller
     }
 
     public function register(UserRequest $request){
-        $data = $this->repository->create(['name'=>$request->name,
-                                           'email'=>$request->email,
-                                          'password' => md5($request->password)
-                                        ]);
-        dd($data);
+        $this->repository->create(['name'=>$request->name,
+                                   'email'=>$request->email,
+                                   'password' => md5($request->password)
+                                 ]);
+        redirect('login');
     }
 }
