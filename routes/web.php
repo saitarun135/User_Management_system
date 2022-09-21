@@ -19,3 +19,6 @@ Route::get('/',function(){
 });
 
 Route::post('register',[UserController::class,'register']);
+Route::get('login',function(){
+    return view('sign-in');
+});
