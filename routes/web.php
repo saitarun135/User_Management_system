@@ -26,3 +26,4 @@ Route::get('login',function(){
 Route::post('login-chk',[ManagerController::class,'login'])->name('user_login');
 
 Route::get('dashboard',[ManagerController::class,'dashboard']);
+Route::get('logout',[ManagerController::class,'logout']);

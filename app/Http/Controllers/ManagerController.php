@@ -40,6 +40,15 @@ class ManagerController extends Controller
         return view('dashboard');
     }
 
+    public function logout()
+    {
+
+        $request = app('request')->all();
+        $chk = $request->session()->get();
+        $chk->flush();
+        return redirect('login');
+    }
+
     public function binaryPassword($pass)
     {
         return $this->repository->model()::getPasswordAttribute($pass);
