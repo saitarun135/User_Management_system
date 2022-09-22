@@ -31,7 +31,8 @@ class ManagerController extends Controller
             return redirect()->back()->withErrors(['count' => 'Invalid credentials']);
         }
         if (isset($result[0])) {
-            session(['user' => [$result[0]]]);
+            $request->session()->put('user',[$result[0]]);
+           // session(['user' => [$result[0]]]);
         }
         return redirect('dashboard');
     }

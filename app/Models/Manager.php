@@ -50,4 +50,8 @@ class Manager extends Authenticatable
         return md5($password);
     }
 
+    public function employees(){
+        return $this->hasMany(Employee::class);
+    }
+
 }
