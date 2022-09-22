@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,12 +19,10 @@ Route::get('/',function(){
     return view('home');
 });
 
-Route::post('register',[UserController::class,'register']);
+Route::post('register',[ManagerController::class,'register']);
 Route::get('login',function(){
     return view('sign-in');
 });
-Route::post('login-chk',[UserController::class,'login'])->name('user_login');
+Route::post('login-chk',[ManagerController::class,'login'])->name('user_login');
 
-Route::get('dashboard',function(){
-    return view('dashboard');
-});
+Route::get('dashboard',[ManagerController::class,'dashboard']);

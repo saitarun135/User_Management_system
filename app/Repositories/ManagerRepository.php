@@ -3,8 +3,7 @@
 namespace App\Repositories;
 
 use App\Criteria\WhereCriteria;
-use App\Entities\Test;
-use App\Models\User;
+use App\Models\Manager;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -13,7 +12,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
  *
  * @package namespace App\Repositories;
  */
-class UserRepository extends BaseRepository implements UserRepositoryInterface
+class ManagerRepository extends BaseRepository implements ManagerRepositoryInterface
 {
     /**
      * Specify Model class name
@@ -22,7 +21,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      */
     public function model()
     {
-        return User::class;
+        return Manager::class;
     }
 
     /**
