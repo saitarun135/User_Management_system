@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
+use App\Criteria\WhereCriteria;
 use App\Entities\Test;
 use App\Models\User;
-use App\Validators\TestValidator;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class TestRepositoryEloquent.
@@ -25,8 +25,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return User::class;
     }
 
-
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -35,4 +33,18 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function register(Array $data)
+    {
+        $this->insert(['name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+        ]);
+    }
+
+    public function login(Array $data){
+        $this->pushCriteria(new WhereCriteria('email',$data['email']));
+        $this->pushCriteria(new WhereCriteria('password',$data['password']));
+        $result = $this->get();
+        return $result;
+    }
 }

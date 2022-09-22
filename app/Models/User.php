@@ -41,4 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $attributes = [
+        'password'
+    ];
+
+    public function getPasswordAttribute($password){
+        return md5($password);
+    }
+
 }

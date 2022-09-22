@@ -23,12 +23,13 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->route()->uri() == 'login-chk') {
+            return [
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ];
+        }
         switch ($this->method()) {
-            case 'POST' && ($this->route()->uri() == 'login'):
-                return [
-                    'email' => ['required', 'email'],
-                    'password' => ['required'],
-                ];
             case 'POST':
                 return [
                     'name' => ['required', 'string'],
@@ -47,20 +48,16 @@ class UserRequest extends FormRequest
 
     public function messages()
     {
-        switch ($this->method()) {
-            case 'POST':
-                return [
-                    'name.required' => 'please provide :attribute ',
-                    'name.string' => 'please enter valid string',
-                    'email.required' => ':attribute is missing please enter',
-                    'email.email' => 'please enter valid :attribute address',
-                    'email.unique' => ':attribute already taken',
-                ];
-            case 'POST' && ($this->route()->uri() == 'login'):
-                return [
-                    'email.required' => ':attribute field is mandatory',
-                    'password' => 'Password is mandatory'
-                ];
-        }
+
+        return [
+            'name.required' => 'please provide :attribute ',
+            'name.string' => 'please enter valid string',
+            'email.required' => ':attribute is missing please enter',
+            'email.email' => 'please enter valid :attribute address',
+            'email.unique' => ':attribute already taken',
+            // 'email.required' => ':attribute field is mandatory',
+            'password' => 'Password is mandatory',
+        ];
+
     }
 }

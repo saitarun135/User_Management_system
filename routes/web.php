@@ -22,3 +22,8 @@ Route::post('register',[UserController::class,'register']);
 Route::get('login',function(){
     return view('sign-in');
 });
+Route::post('login-chk',[UserController::class,'login'])->name('user_login');
+
+Route::get('dashboard',function(){
+    return view('dashboard');
+});
