@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ManagerRequest;
 use App\Repositories\ManagerRepository;
+use Illuminate\Http\Request as HttpRequest;
 
 class ManagerController extends Controller
 {
@@ -40,13 +41,13 @@ class ManagerController extends Controller
         return view('dashboard');
     }
 
-    public function logout()
+    public function logout(HttpRequest $request)
     {
 
-        $request = app('request')->all();
-        $chk = $request->session()->get();
-        $chk->flush();
-        return redirect('login');
+        $chk = $request->session()->pull('user');
+        if (count($chk)>0) {
+            return redirect('login');
+        }
     }
 
     public function binaryPassword($pass)
