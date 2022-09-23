@@ -12,7 +12,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        .btn-default {
+            font-size: 20px !important;
+            border: 1px solid #ddd !important;
 
+        }
     </style>
 </head>
 
@@ -38,18 +42,25 @@
                 <ul class="nav navbar-nav">
 
                 </ul>
-                <form class="navbar-form navbar-left" action="<?php echo url('dashboard'); ?>" method="GET" role="search">
-                    <div class="form-group">
-                        <input type="search" style="margin-left:50%;width:800px;font-size:25px;" name="search" class="form-control"
-                            placeholder="Search">
+                <form class="col-12 navbar-form navbar-left" action="<?php echo url('dashboard'); ?>" method="GET" role="search">
+                    <div class="row justify-content-end">
+                        <div class="col-5 d-flex form-group text-center mb-3">
+                            <input type="search" style="font-size:25px;" name="search" class="form-control"
+                                placeholder="Search">
+                                <button type="submit" class="btn btn-default">Search</button>
+                        </div>
+                        <div class="col-2">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a class="btn " style="font-size:18px;" href="<?php echo url('logout'); ?>"><span
+                                            class="glyphicon glyphicon-log-out"></span>
+                                        Log out</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-default">Search</button>
+
+
                 </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a class="btn " style="font-size:18px;" href="<?php echo url('logout'); ?>"><span
-                                class="glyphicon glyphicon-log-out"></span>
-                            Log out</a></li>
-                </ul>
+
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
