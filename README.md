@@ -24,9 +24,13 @@ MVC
 
 ## Setup
 1.git clone https://github.com/saitarun135/user_management_system.git
+
 2.Do `composer install` or `composer update`.
+
 3.Configure database credentails in .env and Run Migrations `php artisan migrate`.
+
 4.Run Development server `php artisan serve`.
+
 5.If you are using `Nginx server`,skip the 4th step and copy the following one
 
 ```
