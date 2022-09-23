@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Criteria\WhereCriteria;
 use App\Http\Requests\Employeerequest;
 use App\Repositories\EmployeeRepository;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -40,19 +38,19 @@ class EmployeeController extends Controller
             $split_date = date('Y-m-d', strtotime($items['joining_date']));
             $date = explode('-', $split_date);
             if (count($date) == 3) {
-                isset($items['date_of_leaving']) ? $todate= $items['date_of_leaving'] : $todate = Carbon::now();
+                isset($items['date_of_leaving']) ? $todate = $items['date_of_leaving'] : $todate = Carbon::now();
                 $joining_date = Carbon::create($date[0], $date[1], $date[2]);
                 $experience = $joining_date->diff($todate);
-                switch($experience){
-                    case ($experience->format('%y')==0):
+                switch ($experience) {
+                    case ($experience->format('%y') == 0):
                         $experience = $experience->format('%d Days');
                         break;
-                    case ($experience->format('%m')==0):
+                    case ($experience->format('%m') == 0):
                         $experience = $experience->format('%d Days');
                         break;
                     default:
-                    $experience = $experience->format('%y Year, %m Months and %d Days');
-                    break;
+                        $experience = $experience->format('%y Year, %m Months and %d Days');
+                        break;
                 }
                 $items['joining_date'] = $experience;
             }
@@ -60,7 +58,8 @@ class EmployeeController extends Controller
         return view('dashboard')->with('employees', $employees->toArray());
     }
 
-    public function destroy(Employeerequest $request){
+    public function destroy(Employeerequest $request)
+    {
         $this->repository->delete($request->delete_id);
         return redirect('dashboard');
     }
