@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria\WhereCriteria;
 use App\Http\Requests\ManagerRequest;
+use App\Repositories\EmployeeRepository;
 use App\Repositories\ManagerRepository;
 use Illuminate\Http\Request as HttpRequest;
 
@@ -37,10 +39,14 @@ class ManagerController extends Controller
         return redirect('dashboard');
     }
 
-    public function dashboard()
-    {
-        return view('dashboard');
-    }
+    // public function dashboard()
+    // {
+    //     $repo = new EmployeeRepository();
+    //     $repo->pushCriteria(new WhereCriteria('manager_id',$this->getLoggedInID()));
+    //     $repo->all();
+    //     dd($repo);
+    //     return view('dashboard');
+    // }
 
     public function logout(HttpRequest $request)
     {

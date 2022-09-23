@@ -31,7 +31,7 @@ class Employeerequest extends FormRequest
                     'doj' => 'required',
                     'dol' => 'sometimes',
                     'current_date' => 'sometimes|nullable',
-                    'image' => 'sometimes|nullable|mimes:png,jpg',
+                    'image' => 'sometimes|nullable',
                 ];
             default:
                 return [];

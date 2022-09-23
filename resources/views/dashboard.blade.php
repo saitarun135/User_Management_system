@@ -46,6 +46,20 @@
             font-family: "Times New Roman";
             font-size: 20px;
         }
+
+        span.circle {
+            background: #ADD8E6;
+            border-radius: 50%;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            color: #6e6e6e;
+            display: inline-block;
+            font-weight: bold;
+            line-height: 40px;
+            margin-right: 5px;
+            text-align: center;
+            width: 40px;
+        }
     </style>
 </head>
 
@@ -73,7 +87,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="<?php echo url('postemployee'); ?>" method="POST">
+                        <form action="<?php echo url('postemployee'); ?>" method="POST" enctype="multipart/form-data">
                             @csrf
                             @if (count($errors) > 0)
                                 <div class="alert alert-danger">
@@ -93,7 +107,7 @@
                                 <div class="form-group">
                                     <label for="email1">Full Name</label>
                                     <input type="text" class="form-control" id="fname"
-                                        aria-describedby="emailHelp"  name="fname" placeholder="Enter Name">
+                                        aria-describedby="emailHelp" name="fname" placeholder="Enter Name">
 
                                 </div>
                                 <div class="form-group">
@@ -117,11 +131,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email1">Upload Image</label>
-                                    <input type="file" class="form-control" id="email"
-                                        name="image" aria-describedby="emailHelp">
+                                    <input type="file" class="form-control" id="email" name="image"
+                                        aria-describedby="emailHelp">
                                 </div>
                                 <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
 
                             </div>
@@ -139,7 +153,6 @@
     <div class="right-btn">
     </div>
 
-
     <table class="table table-bordered" id="table">
         <tr>
             <th>Avatar</th>
@@ -148,16 +161,20 @@
             <th>Experience</th>
             <th>Action</th>
         </tr>
-        <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-        </tr>
-        <tr>
-            <td>Centro comercial Moctezuma</td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-        </tr>
+        @foreach ($employees as $employee)
+            <tr>
+                <td>
+                    @if (isset($employee['image_path']))
+                        <img  style="border-radius: 50%;height:40px;width:40px;" src={{ URL::asset("/images/{$employee['image_path']}") }} alt="Avatar">
+                    @else
+                        <span class="circle">{{ ucfirst(mb_substr($employee['name'], 0, 1)) }}</span>
+                    @endif
+                </td>
+                <td>{{ $employee['name'] }}</td>
+                <td>{{ $employee['email'] }}</td>
+                <td>{{ $employee['joining_date'] }}</td>
+            </tr>
+        @endforeach
     </table>
 
 

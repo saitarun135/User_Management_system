@@ -28,8 +28,9 @@ Route::get('login',function(){
 Route::post('login-chk',[ManagerController::class,'login'])->name('user_login');
 
 Route::group(['middleware'=>['isLogged']],function(){
-    Route::get('dashboard',[ManagerController::class,'dashboard']);
+    Route::get('dashboard',[EmployeeController::class,'dashboard']);
     Route::get('logout',[ManagerController::class,'logout']);
     Route::post('postemployee',[EmployeeController::class,'create']);
+    Route::get('getData',[EmployeeController::class,'show']);
 });
 
