@@ -9,11 +9,15 @@
 
 ## About UserManagement
 
-It's a demo application for managing employees in an organization.
+It's a demo application for managing employees in an organization from this we can check from how many years employee has served in the particular organization.
 ## Technology Stack
-Laravel
-Blade
-Mysql
+Laravel:- 8.7s
 
-## Pattern
+php:- 7.4
+
+Mysql:- 8.0
+
+## Pattern & Architecture
 Repository pattern
+
+MVC
