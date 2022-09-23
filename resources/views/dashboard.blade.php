@@ -185,7 +185,6 @@
             <th>Action</th>
         </tr>
         @foreach ($employees as $employee)
-            {{-- <?php var_dump($employee['id']); ?> --}}
             <tr>
                 <td>
                     @if (isset($employee['image_path']))
@@ -197,15 +196,20 @@
                 </td>
                 <td>{{ ucfirst($employee['name']) }}</td>
                 <td>{{ $employee['email'] }}</td>
-                <td>{{ $employee['joining_date'] }}</td>
+                <td>
+                    @if ($employee['joining_date'] == '0 Days')
+                        <span data-toggle="tooltip" data-placement="top" title="Fresher"
+                            style="color:green;font-weight:500;">Joined Today</span>
+                    @else
+                        {{ $employee['joining_date'] }}
+                    @endif
+                </td>
                 <td>
                     <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter"
                         value="{{ $employee['id'] }}">
 
                         <span style="margin-top:10px;" onclick="getId()" value={{ $employee['id'] }}
-                            class="glyphicon glyphicon-remove">
-                            {{-- <p style="font-size:20px;">Remove</p> --}}
-                            {{-- {{$employee['id']}} --}}
+                            class="glyphicon glyphicon-remove">Remove
                         </span>
                     </button>
 
@@ -221,7 +225,8 @@
                                         @csrf
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-primary confirm_buttons"
-                                            data-toggle="modal" name="delete_id" value="{{ $employee['id'] }}" data-target="#exampleModalCenter">Yes</button>
+                                            data-toggle="modal" name="delete_id" value="{{ $employee['id'] }}"
+                                            data-target="#exampleModalCenter">Yes</button>
                                         <button type="submit" class="btn btn-secondary confirm_buttons"
                                             data-toggle="modal" data-target="#exampleModalCenter">No</button>
                                     </form>
@@ -238,16 +243,7 @@
 
 
     <script type="text/javascript">
-        // document.getElementById('new-form').style.visibility = 'hidden';
 
-        // function toggle() {
-        //     document.getElementById('new-form').style.visibility = "visible";
-        //     document.getElementById('table').style.opacity = '0.5';
-        // }
-        function getId() {
-            $val = document.getElementById('remove_btn').value;
-            alert($val);
-        }
     </script>
 </body>
 
