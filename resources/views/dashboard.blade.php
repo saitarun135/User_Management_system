@@ -1,4 +1,4 @@
-@include('header')
+@include('header');
 <!DOCTYPE html>
 <html>
 
@@ -29,6 +29,8 @@
 
         .table-bordered {
             margin-top: 3%;
+            width: 1500px;
+            margin-left: 7%;
         }
 
         #new-form {
@@ -86,17 +88,14 @@
             -webkit-box-shadow: none !important;
             outline: none !important;
         }
-        .glyphicon-remove {
-            font-size: 20px;;
-        }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-6">
-                <h4 class="" style="font-size:20px;font-weight:80px;">User Records</h4>
+                <h4 class="" style="font-size:20px;font-weight:35px;">User Records</h4>
             </div>
             <div class="col-6 text-right">
                 <button type="button" style="font-size:20px;font-weight:28px;" class="btn btn-primary"
@@ -173,6 +172,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="right-btn">
+    </div>
 
     <table class="table table-bordered" id="table">
         <tr>
@@ -207,7 +209,7 @@
                         value="{{ $employee['id'] }}">
 
                         <span style="margin-top:10px;" onclick="getId()" value={{ $employee['id'] }}
-                            class="glyphicon glyphicon-remove"><span>Remove</span>
+                            class="glyphicon glyphicon-remove">Remove
                         </span>
                     </button>
 
@@ -238,10 +240,6 @@
             </tr>
         @endforeach
     </table>
-    </div>
-    <div class="right-btn">
-    </div>
-
 
 
     <script type="text/javascript">
