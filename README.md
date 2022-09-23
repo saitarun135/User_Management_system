@@ -21,3 +21,10 @@ Mysql:- 8.0
 Repository pattern
 
 MVC
+
+## Setup
+1.git clone https://github.com/saitarun135/user_management_system.git
+
+2.do `composer install` or `composer update`.
+
+3.Run Migrations `php artisan migrate`.
