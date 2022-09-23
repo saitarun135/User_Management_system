@@ -75,6 +75,9 @@
         .confirm_buttons{
             width:60px;
         }
+        .popup{
+            font-size:15px;
+        }
     </style>
 </head>
 
@@ -95,13 +98,13 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header text-center">
                         <h5 class="modal-title" id="exampleModalLabel">Add New Employee</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body popup">
                         <form action="<?php echo url('postemployee'); ?>" method="POST" enctype="multipart/form-data">
                             @csrf
                             @if (count($errors) > 0)
@@ -139,7 +142,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" style="margin-top:10px;" type="checkbox"
                                         name="current_date" id="defaultCheck1">
-                                    <label class="form-check-label" style="font-size:17px;margin-left:30px;"
+                                    <label class="form-check-label" style="margin-left:30px;"
                                         for="defaultCheck1">
                                         Still working
                                     </label>
