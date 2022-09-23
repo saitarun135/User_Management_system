@@ -24,6 +24,11 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
         return Employee::class;
     }
 
+    public $fieldSearchable = [
+        'name' => 'like',
+        'email' => 'like'
+    ];
+
     /**
      * Boot up the repository, pushing criteria
      */

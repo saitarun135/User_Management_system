@@ -60,6 +60,21 @@
             text-align: center;
             width: 40px;
         }
+
+        .buttons {
+            width: 200px;
+            margin: 0 auto;
+            display: inline;
+        }
+
+        .action_btn {
+            width: 200px;
+            margin: 0 auto;
+            display: inline;
+        }
+        .confirm_buttons{
+            width:60px;
+        }
     </style>
 </head>
 
@@ -162,28 +177,67 @@
             <th>Action</th>
         </tr>
         @foreach ($employees as $employee)
+        {{-- <?php var_dump($employee['id']); ?> --}}
             <tr>
                 <td>
                     @if (isset($employee['image_path']))
-                        <img  style="border-radius: 50%;height:40px;width:40px;" src={{ URL::asset("/images/{$employee['image_path']}") }} alt="Avatar">
+                        <img style="border-radius: 50%;height:40px;width:40px;"
+                            src={{ URL::asset("/images/{$employee['image_path']}") }} alt="Avatar">
                     @else
                         <span class="circle">{{ ucfirst(mb_substr($employee['name'], 0, 1)) }}</span>
                     @endif
                 </td>
-                <td>{{ $employee['name'] }}</td>
+                <td>{{ ucfirst($employee['name']) }}</td>
                 <td>{{ $employee['email'] }}</td>
                 <td>{{ $employee['joining_date'] }}</td>
+                <td>
+                    <button type="submit"  class="btn"  data-toggle="modal" data-target="#exampleModalCenter"
+                        value="{{$employee['id']}}">
+
+                        <span style="margin-top:10px;"  onclick="getId()" value={{$employee['id']}} class="glyphicon glyphicon-remove">
+                            {{-- <p style="font-size:20px;">Remove</p> --}}
+                            {{-- {{$employee['id']}} --}}
+                        </span>
+                    </button>
+
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+
+                                <div class="modal-body text-center">
+                                    Are you sure you want to delete ?
+                                    <br><br>
+                                    <form action="<?php echo url('delete');?>" method="POST">
+                                        <input type="hidden" id="hidden">
+                                        <?php var_dump($employee['id']); ?>
+                                    <button type="submit"  class="btn btn-primary confirm_buttons" data-toggle="modal"
+                                        data-target="#exampleModalCenter" >Yes</button>
+                                    <button type="submit" class="btn btn-secondary confirm_buttons" data-toggle="modal"
+                                        data-target="#exampleModalCenter">No</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
             </tr>
         @endforeach
     </table>
 
 
     <script type="text/javascript">
-        document.getElementById('new-form').style.visibility = 'hidden';
+        // document.getElementById('new-form').style.visibility = 'hidden';
 
-        function toggle() {
-            document.getElementById('new-form').style.visibility = "visible";
-            document.getElementById('table').style.opacity = '0.5';
+        // function toggle() {
+        //     document.getElementById('new-form').style.visibility = "visible";
+        //     document.getElementById('table').style.opacity = '0.5';
+        // }
+        function getId(){
+            $val = document.getElementById('remove_btn').value;
+            alert($val);
         }
     </script>
 </body>

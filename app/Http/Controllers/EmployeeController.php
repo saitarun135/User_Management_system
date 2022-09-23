@@ -42,10 +42,17 @@ class EmployeeController extends Controller
             if (count($date) == 3) {
                 isset($items['date_of_leaving']) ? $todate= $items['date_of_leaving'] : $todate = Carbon::now();
                 $joining_date = Carbon::create($date[0], $date[1], $date[2]);
-                $experience = $joining_date->diff($todate)->format('%y Year, %m Months and %d Days');
+                $experience = $joining_date->diff($todate)->format('%y Years, %m Months and %d Days');
                 $items['joining_date'] = $experience;
             }
         });
+        // return $employees;
         return view('dashboard')->with('employees', $employees->toArray());
+    }
+
+    public function destroy($id){
+        $this->repository->find($id);
+        $this->repository->trashed();
+        return redirect('dashboard');
     }
 }

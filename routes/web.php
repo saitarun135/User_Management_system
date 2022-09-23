@@ -32,5 +32,6 @@ Route::group(['middleware'=>['isLogged']],function(){
     Route::get('logout',[ManagerController::class,'logout']);
     Route::post('postemployee',[EmployeeController::class,'create']);
     Route::get('getData',[EmployeeController::class,'show']);
+    Route::delete('delete/{id}',[EmployeeController::class,'destroy']);
 });
 
