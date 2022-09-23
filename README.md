@@ -31,7 +31,7 @@ MVC
 
 4.Run Development server `php artisan serve`.
 
-5.If you are using `Nginx server`,skip the 4th step and copy the following one
+5.If you are using `Nginx server`,skip the 4th step and copy the following one in `sites-available`.
 
 ```
 server {
