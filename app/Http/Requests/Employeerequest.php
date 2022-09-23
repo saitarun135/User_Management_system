@@ -23,7 +23,6 @@ class Employeerequest extends FormRequest
      */
     public function rules()
     {
-        dd($this->request->all());
         switch ($this->method()) {
             case 'POST':
                 return [
