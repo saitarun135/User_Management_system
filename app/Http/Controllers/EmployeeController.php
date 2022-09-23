@@ -16,7 +16,7 @@ class EmployeeController extends Controller
     }
 
     public function create(Employeerequest $request){
-        $data = $request->all();
-        $this->repository->postEmployee($data);
+        $this->repository->postEmployee($request->all(),$this->getLoggedInID());
+        redirect('dashboard');
     }
 }

@@ -3,11 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Employee;
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\EmployeeRepositoryRepository;
-
-use App\Validators\EmployeeRepositoryValidator;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class EmployeeRepositoryRepositoryEloquent.
@@ -26,8 +24,6 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
         return Employee::class;
     }
 
-
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -36,14 +32,18 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function postEmployee(Array $attributes){
-        $a = $this->session()->get('user');
-        // $this->create([
-        //     'name' => $attributes['name'],
-        //     'email' => $attributes['email'],
-        //     'joining_date' => $attributes['doj'],
-        //     'manager_id' =>
-        //     ])
+    public function postEmployee(array $attributes, $mangerID)
+    {
+        // dd($attributes);
+        $this->insert([
+            'name' => $attributes['fname'],
+            'email' => $attributes['email'],
+            'joining_date' => $attributes['doj'],
+            'manager_id' => $mangerID,
+            'image_path' => isset($attributes['image']) ? $attributes['image'] : null,
+            'date_of_leaving' => isset($attributes['dol']) ? $attributes['dol'] : null,
+            'still_working' => isset($attributes['current_date']) ? $attributes['current_date'] : null,
+        ]);
     }
 
 }
