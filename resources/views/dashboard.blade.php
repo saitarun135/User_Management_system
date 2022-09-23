@@ -72,11 +72,21 @@
             margin: 0 auto;
             display: inline;
         }
-        .confirm_buttons{
-            width:60px;
+
+        .confirm_buttons {
+            width: 60px;
         }
-        .popup{
-            font-size:15px;
+
+        .popup {
+            font-size: 15px;
+        }
+
+        .file:focus,
+        .file:active {
+            box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            outline: none !important;
         }
     </style>
 </head>
@@ -139,30 +149,25 @@
                                     <input type="date" class="form-control" id="password1" name="dol">
                                 </div>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" style="margin-top:10px;" type="checkbox"
-                                        name="current_date" id="defaultCheck1">
-                                    <label class="form-check-label" style="margin-left:30px;"
-                                        for="defaultCheck1">
+                                <div class="form-check form-inline">
+                                    <label class="form-check-label" for="defaultCheck1">
                                         Still working
                                     </label>
+                                    <input class="form-check-input" type="checkbox" name="current_date"
+                                        id="defaultCheck1">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group form-inline">
                                     <label for="email1">Upload Image</label>
-                                    <input type="file" class="form-control" id="email" name="image"
-                                        aria-describedby="emailHelp">
+                                    <input type="file" class="file" class="form-control" id="email"
+                                        name="image" aria-describedby="emailHelp">
                                 </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
 
                             </div>
                         </form>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -180,7 +185,7 @@
             <th>Action</th>
         </tr>
         @foreach ($employees as $employee)
-        {{-- <?php var_dump($employee['id']); ?> --}}
+            {{-- <?php var_dump($employee['id']); ?> --}}
             <tr>
                 <td>
                     @if (isset($employee['image_path']))
@@ -194,10 +199,11 @@
                 <td>{{ $employee['email'] }}</td>
                 <td>{{ $employee['joining_date'] }}</td>
                 <td>
-                    <button type="submit"  class="btn"  data-toggle="modal" data-target="#exampleModalCenter"
-                        value="{{$employee['id']}}">
+                    <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter"
+                        value="{{ $employee['id'] }}">
 
-                        <span style="margin-top:10px;"  onclick="getId()" value={{$employee['id']}} class="glyphicon glyphicon-remove">
+                        <span style="margin-top:10px;" onclick="getId()" value={{ $employee['id'] }}
+                            class="glyphicon glyphicon-remove">
                             {{-- <p style="font-size:20px;">Remove</p> --}}
                             {{-- {{$employee['id']}} --}}
                         </span>
@@ -211,13 +217,13 @@
                                 <div class="modal-body text-center">
                                     Are you sure you want to delete ?
                                     <br><br>
-                                    <form action="<?php echo url('delete');?>" method="POST">
-                                        <input type="hidden" id="hidden">
-                                        <?php var_dump($employee['id']); ?>
-                                    <button type="submit"  class="btn btn-primary confirm_buttons" data-toggle="modal"
-                                        data-target="#exampleModalCenter" >Yes</button>
-                                    <button type="submit" class="btn btn-secondary confirm_buttons" data-toggle="modal"
-                                        data-target="#exampleModalCenter">No</button>
+                                    <form action="<?php echo url('delete'); ?>" method="POST">
+                                        @csrf
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit" class="btn btn-primary confirm_buttons"
+                                            data-toggle="modal" name="delete_id" value="{{ $employee['id'] }}" data-target="#exampleModalCenter">Yes</button>
+                                        <button type="submit" class="btn btn-secondary confirm_buttons"
+                                            data-toggle="modal" data-target="#exampleModalCenter">No</button>
                                     </form>
                                 </div>
 
@@ -238,7 +244,7 @@
         //     document.getElementById('new-form').style.visibility = "visible";
         //     document.getElementById('table').style.opacity = '0.5';
         // }
-        function getId(){
+        function getId() {
             $val = document.getElementById('remove_btn').value;
             alert($val);
         }

@@ -6,6 +6,7 @@ use App\Criteria\WhereCriteria;
 use App\Http\Requests\Employeerequest;
 use App\Repositories\EmployeeRepository;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -46,13 +47,11 @@ class EmployeeController extends Controller
                 $items['joining_date'] = $experience;
             }
         });
-        // return $employees;
         return view('dashboard')->with('employees', $employees->toArray());
     }
 
-    public function destroy($id){
-        $this->repository->find($id);
-        $this->repository->trashed();
+    public function destroy(Employeerequest $request){
+        $this->repository->delete($request->delete_id);
         return redirect('dashboard');
     }
 }

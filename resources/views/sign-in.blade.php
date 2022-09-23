@@ -76,7 +76,7 @@ span.psw {
 </head>
 <body>
 
-<h2>Login Form</h2>
+<h2 style="text-align: center">Login Form</h2>
 
 <form action="<?php echo url('login-chk'); ?>" method="POST">
 @csrf
@@ -99,7 +99,7 @@ span.psw {
 
     <button type="submit">Login</button>
     <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
+      <a href="<?php echo url('/'); ?>" >New Register</a>
     </label>
   </div>
 

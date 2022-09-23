@@ -33,6 +33,10 @@ class Employeerequest extends FormRequest
                     'current_date' => 'sometimes|nullable',
                     'image' => 'sometimes|nullable',
                 ];
+            case 'DELETE':
+                return [
+                    'delete_id' => 'required'
+                ];
             default:
                 return [];
         }
