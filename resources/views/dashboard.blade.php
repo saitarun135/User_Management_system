@@ -1,4 +1,4 @@
-@include('header');
+@include('header')
 <!DOCTYPE html>
 <html>
 
@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         .left-btn {
@@ -29,8 +30,6 @@
 
         .table-bordered {
             margin-top: 3%;
-            width: 1500px;
-            margin-left: 7%;
         }
 
         #new-form {
@@ -88,14 +87,19 @@
             -webkit-box-shadow: none !important;
             outline: none !important;
         }
+
+        .glyphicon-remove {
+            font-size: 20px;
+            ;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-6">
-                <h4 class="" style="font-size:20px;font-weight:35px;">User Records</h4>
+                <h4 class="" style="font-size:20px;font-weight:80px;">User Records</h4>
             </div>
             <div class="col-6 text-right">
                 <button type="button" style="font-size:20px;font-weight:28px;" class="btn btn-primary"
@@ -172,78 +176,82 @@
                 </div>
             </div>
         </div>
+
+        <table class="table table-bordered" id="table">
+            <tr>
+                <th>Avatar</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Experience</th>
+                <th>Action</th>
+            </tr>
+            @foreach ($employees as $employee)
+                <tr>
+                    <td>
+                        @if (isset($employee['image_path']))
+                            <img style="border-radius: 50%;height:40px;width:40px;"
+                                src={{ URL::asset("/images/{$employee['image_path']}") }} alt="Avatar">
+                        @else
+                            <span class="circle">{{ ucfirst(mb_substr($employee['name'], 0, 1)) }}</span>
+                        @endif
+                    </td>
+                    <td>{{ ucfirst($employee['name']) }}</td>
+                    <td>{{ $employee['email'] }}</td>
+                    <td>
+                        @if ($employee['joining_date'] == '0 Days')
+                            <span data-toggle="tooltip" data-placement="top" title="Fresher"
+                                style="color:green;font-weight:500;">Joined Today</span>
+                        @else
+                            {{ $employee['joining_date'] }}
+                        @endif
+                    </td>
+                    <td>
+                        <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter"
+                            data-backdrop="static" data-keyboard="false" value="{{ $employee['id'] }}"
+                            onclick="getID(this.value)">
+
+                            <span style="margin-top:10px;" id="rmr"
+                                class="glyphicon glyphicon-remove"><span>Remove</span>
+                            </span>
+                        </button>
+
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+
+                                    <div class="modal-body text-center">
+                                        Are you sure you want to delete ?
+                                        <br><br>
+                                        <form action="<?php echo url('delete'); ?>" method="POST">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" class="btn btn-primary confirm_buttons"
+                                                data-toggle="modal" name="delete_id" id="delete_id_from_btn"
+                                                data-target="#exampleModalCenter">Yes</button>
+                                            <button type="submit" class="btn btn-secondary confirm_buttons"
+                                                data-toggle="modal" data-target="#exampleModalCenter">No</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            @endforeach
+        </table>
     </div>
     <div class="right-btn">
     </div>
 
-    <table class="table table-bordered" id="table">
-        <tr>
-            <th>Avatar</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Experience</th>
-            <th>Action</th>
-        </tr>
-        @foreach ($employees as $employee)
-            <tr>
-                <td>
-                    @if (isset($employee['image_path']))
-                        <img style="border-radius: 50%;height:40px;width:40px;"
-                            src={{ URL::asset("/images/{$employee['image_path']}") }} alt="Avatar">
-                    @else
-                        <span class="circle">{{ ucfirst(mb_substr($employee['name'], 0, 1)) }}</span>
-                    @endif
-                </td>
-                <td>{{ ucfirst($employee['name']) }}</td>
-                <td>{{ $employee['email'] }}</td>
-                <td>
-                    @if ($employee['joining_date'] == '0 Days')
-                        <span data-toggle="tooltip" data-placement="top" title="Fresher"
-                            style="color:green;font-weight:500;">Joined Today</span>
-                    @else
-                        {{ $employee['joining_date'] }}
-                    @endif
-                </td>
-                <td>
-                    <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter"
-                        value="{{ $employee['id'] }}">
-
-                        <span style="margin-top:10px;" onclick="getId()" value={{ $employee['id'] }}
-                            class="glyphicon glyphicon-remove">Remove
-                        </span>
-                    </button>
-
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-
-                                <div class="modal-body text-center">
-                                    Are you sure you want to delete ?
-                                    <br><br>
-                                    <form action="<?php echo url('delete'); ?>" method="POST">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-primary confirm_buttons"
-                                            data-toggle="modal" name="delete_id" value="{{ $employee['id'] }}"
-                                            data-target="#exampleModalCenter">Yes</button>
-                                        <button type="submit" class="btn btn-secondary confirm_buttons"
-                                            data-toggle="modal" data-target="#exampleModalCenter">No</button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </td>
-            </tr>
-        @endforeach
-    </table>
 
 
     <script type="text/javascript">
-
+        function getID(objButton) {
+            document.getElementById('delete_id_from_btn').value = objButton;
+        }
     </script>
 </body>
 

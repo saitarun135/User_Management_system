@@ -51,11 +51,15 @@ class LastDayOrLeft extends Command
         $today = implode(" ",$today);
         if (isset($today)) {
             DB::enableQueryLog();
-            //$this->repository->pushCriteria(new WhereCriteria('date_of_leaving', $today));
             $data = $this->repository->all();
             foreach($data as $key => $value){
-                if($value['date_of_leaving'] != $today){
+                if($value['date_of_leaving'] != $today && is_null($value['deleted_at'])){
                     unset($data[$key]);
+                }
+            }
+            if(isset($data) && count($data) > 0){
+                foreach($data as $key =>$item){
+                    $this->repository->where('id',$item['id'])->update(['status' => 'left']);
                 }
             }
             Log::alert($data);

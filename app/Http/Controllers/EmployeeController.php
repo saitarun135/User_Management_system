@@ -60,6 +60,7 @@ class EmployeeController extends Controller
 
     public function destroy(Employeerequest $request)
     {
+       //dd($request->delete_id);
         $this->repository->delete($request->delete_id);
         return redirect('dashboard');
     }
