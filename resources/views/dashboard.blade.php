@@ -200,10 +200,10 @@
                     <td>
                         @if ($employee['status'] != 'working')
                             @if ($employee['status'] == 'last working day')
-                                <span data-toggle="tooltip" data-placement="top" title="Fresher"
+                                <span data-toggle="tooltip" data-placement="top" title="{{$employee['joining_date']}}"
                                     style="color:rgb(32, 14, 194);font-weight:500;">Last Working Day</span>
                             @elseif ($employee['status'] == 'left')
-                                <span data-toggle="tooltip" data-placement="top" title="Fresher"
+                                <span data-toggle="tooltip" data-placement="top" title="{{$employee['joining_date']}}"
                                     style="color:rgb(250, 38, 19);font-weight:500;">Left</span>
                             @endif
                         @else

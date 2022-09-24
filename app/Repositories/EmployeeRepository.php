@@ -26,9 +26,7 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
     public $fieldSearchable = [
         'name' => 'like',
         'email' => 'like',
-        // 'joining_date' => ['type' => 'DateSearch', 'condition' => 'like'],
-        // 'date_of_leaving' => ['type' => 'DateSearch', 'condition' => 'like'],
-        // 'still_working' => ['type' => 'DateSearch', 'condition' => 'like'],
+        'status' => ['type' => 'ENUM', 'condition' => '=', 'enum' => ['LEFT', 'LAST WORKING DAY']],
     ];
 
     /**
@@ -38,17 +36,25 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
     {
         $this->pushCriteria(app(RequestCriteria::class));
         $request = app('request');
-        // if ($request->has('search') && count($this->fieldSearchable) > 0) {
-        //     foreach ($this->fieldSearchable as $key => $item) {
-        //         if (is_array($item) && array_key_exists('type', $item)) {
-        //             if ($item['type'] == 'DateSearch') {
-
-        //                 // request()->query(['search',]);
-        //                 // request()->query->remove('search');
-        //             }
-        //         }
-        //     }
-        // }
+        if ($request->has('search') && count($this->fieldSearchable) > 0) {
+            foreach ($this->fieldSearchable as $key => $item) {
+                if (is_array($item) && array_key_exists('type', $item)) {
+                    if ($item['type'] == 'ENUM' && is_array($item['enum'])) {
+                        if (in_array(strtoupper($request->search), $item['enum'])) {
+                            while(!$key=='status'){
+                                unset($this->fieldSearchable);
+                            }
+                            $this->fieldSearchable[$key] = $request->search;
+                        }
+                        else{
+                            unset($this->fieldSearchable[$key]);
+                        }
+                        // request()->query(['search',]);
+                        // request()->query->remove('search');
+                    }
+                }
+            }
+        }
     }
 
     public function postEmployee(array $attributes, $mangerID)
