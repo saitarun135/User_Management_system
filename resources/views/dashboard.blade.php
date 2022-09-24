@@ -97,6 +97,10 @@
             border: 1px solid #ddd;
             background: #dddd;
         }
+        .customform{
+           font-size: 60px;
+           line-height: 35px;
+        }
     </style>
 </head>
 
@@ -113,7 +117,7 @@
                 </button>
             </div>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade customform" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -159,11 +163,11 @@
                                 </div>
 
                                 <div class="form-check form-inline">
-                                    <label class="form-check-label" for="defaultCheck1">
+                                    <label class="form-check-label"  style="margin-left:-15px;" for="defaultCheck1">
                                         Still working
                                     </label>
                                     <input class="form-check-input" type="checkbox" name="current_date"
-                                        id="defaultCheck1">
+                                        id="defaultCheck1" style="margin-left:20px;">
                                 </div>
                                 <div class="form-group form-inline">
                                     <label for="email1">Upload Image</label>
@@ -171,7 +175,7 @@
                                         name="image" aria-describedby="emailHelp">
                                 </div>
                                 <div class="form-group text-center">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary" style="width: 100px;font-size:20px;height:40px;">Save</button>
                                 </div>
 
                             </div>
