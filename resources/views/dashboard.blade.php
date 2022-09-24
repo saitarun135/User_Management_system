@@ -92,6 +92,11 @@
             font-size: 20px;
             ;
         }
+        .remove-btn {
+            font-size: 20px;
+            border: 1px solid #ddd;
+            background: #dddd;
+        }
     </style>
 </head>
 
@@ -222,13 +227,9 @@
                         @endif --}}
                     </td>
                     <td>
-                        <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter"
+                        <button type="submit" class="btn remove-btn" data-toggle="modal" data-target="#exampleModalCenter"
                             data-backdrop="static" data-keyboard="false" value="{{ $employee['id'] }}"
-                            onclick="getID(this.value)">
-
-                            <span style="margin-top:10px;" id="rmr"
-                                class="glyphicon glyphicon-remove"><span>Remove</span>
-                            </span>
+                            onclick="getID(this.value)">Remove
                         </button>
 
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
