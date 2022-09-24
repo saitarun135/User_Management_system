@@ -33,7 +33,7 @@ class EmployeeController extends Controller
 
     public function dashboard()
     {
-        $employees = $this->repository->with('managers')->all();
+        $employees = $this->repository->with('managers')->orderBy('id','DESC')->all();
         $employees->filter(function ($items) {
             $split_date = date('Y-m-d', strtotime($items['joining_date']));
             $date = explode('-', $split_date);
