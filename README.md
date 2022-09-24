@@ -29,7 +29,7 @@ MVC
 
 3.Configure database credentails in .env and Run Migrations `php artisan migrate`.
 
-4.Run Development server `php artisan serve`.
+4.Run Development server `php artisan serve` and run `php artisan schedule:run`.
 
 5.If you are using `Nginx server`,skip the 4th step and copy the following one in `sites-available`.
 
