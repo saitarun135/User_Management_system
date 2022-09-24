@@ -50,7 +50,6 @@ class LastDayOrLeft extends Command
         $today[1] = "00:00:00";
         $today = implode(" ",$today);
         if (isset($today)) {
-            DB::enableQueryLog();
             $data = $this->repository->all();
             foreach($data as $key => $value){
                 if($value['date_of_leaving'] != $today && is_null($value['deleted_at'])){
@@ -59,7 +58,9 @@ class LastDayOrLeft extends Command
             }
             if(isset($data) && count($data) > 0){
                 foreach($data as $key =>$item){
-                    $this->repository->where('id',$item['id'])->update(['status' => 'left']);
+                    ($item['status'] == 'last working day') ?
+                        $this->repository->where('id',$item['id'])->update(['status' => 'left']) :
+                        $this->repository->where('id',$item['id'])->update(['status' => 'last working day']);
                 }
             }
             Log::alert($data);

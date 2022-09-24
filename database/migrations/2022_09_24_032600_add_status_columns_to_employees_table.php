@@ -14,7 +14,7 @@ class AddStatusColumnsToEmployeesTable extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->enum('status',['working','left'])->default('working');
+            $table->enum('status',['working','left','last working day'])->default('working');
         });
     }
 
@@ -26,7 +26,7 @@ class AddStatusColumnsToEmployeesTable extends Migration
     public function down()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->enum('status',['working','left'])->default('working');
+            $table->enum('status',['working','left','last working day'])->default('working');
         });
     }
 }

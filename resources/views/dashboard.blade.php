@@ -198,12 +198,28 @@
                     <td>{{ ucfirst($employee['name']) }}</td>
                     <td>{{ $employee['email'] }}</td>
                     <td>
-                        @if ($employee['joining_date'] == '0 Days')
+                        @if ($employee['status'] != 'working')
+                            @if ($employee['status'] == 'last working day')
+                                <span data-toggle="tooltip" data-placement="top" title="Fresher"
+                                    style="color:rgb(32, 14, 194);font-weight:500;">Last Working Day</span>
+                            @elseif ($employee['status'] == 'left')
+                                <span data-toggle="tooltip" data-placement="top" title="Fresher"
+                                    style="color:rgb(250, 38, 19);font-weight:500;">Left</span>
+                            @endif
+                        @else
+                            @if ($employee['joining_date'] == '0 Days')
+                                <span data-toggle="tooltip" data-placement="top" title="Fresher"
+                                    style="color:green;font-weight:500;">Joined Today</span>
+                            @else
+                                {{ $employee['joining_date'] }}
+                            @endif
+                        @endif
+                        {{-- @if ($employee['joining_date'] == '0 Days')
                             <span data-toggle="tooltip" data-placement="top" title="Fresher"
                                 style="color:green;font-weight:500;">Joined Today</span>
                         @else
                             {{ $employee['joining_date'] }}
-                        @endif
+                        @endif --}}
                     </td>
                     <td>
                         <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter"
