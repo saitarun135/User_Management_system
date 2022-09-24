@@ -42,13 +42,6 @@ class Manager extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public $attributes = [
-        'password'
-    ];
-
-    public function getPasswordAttribute($password){
-        return md5($password);
-    }
 
     public function employees(){
         return $this->hasMany(Employee::class);

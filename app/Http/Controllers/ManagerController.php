@@ -6,6 +6,8 @@ use App\Http\Requests\ManagerRequest;
 use App\Repositories\ManagerRepository;
 use Illuminate\Http\Request as HttpRequest;
 
+use function App\Http\binaryPassword;
+
 class ManagerController extends Controller
 {
     protected $repository;
@@ -17,7 +19,7 @@ class ManagerController extends Controller
     public function register(ManagerRequest $request)
     {
         $data = $request->all();
-        $data['password'] = $this->binaryPassword($data['password']);
+        $data['password'] = binaryPassword($data['password']);
         $this->repository->register($data);
         return redirect('login');
     }
@@ -25,7 +27,7 @@ class ManagerController extends Controller
     public function login(ManagerRequest $request)
     {
         $data = $request->all();
-        $data['password'] = $this->binaryPassword($data['password']);
+        $data['password'] = binaryPassword($data['password']);
         $result = $this->repository->login($data);
         if (count($result) < 1) {
             return redirect()->back()->withErrors(['count' => 'Invalid credentials']);
@@ -45,8 +47,4 @@ class ManagerController extends Controller
         }
     }
 
-    public function binaryPassword($pass)
-    {
-        return $this->repository->model()::getPasswordAttribute($pass);
-    }
 }
