@@ -81,10 +81,10 @@ a {
 @csrf
   <div class="container">
   @if (count($errors) > 0)
-    <div class="alert alert-danger">
+    <div class="alert alert-danger text-center">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li style="list-style-type: none;">{{ $error }}</li>
             @endforeach
         </ul>
     </div>

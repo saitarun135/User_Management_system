@@ -81,10 +81,10 @@ span.psw {
 <form action="<?php echo url('login-chk'); ?>" method="POST">
 @csrf
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
+    <div class="alert alert-danger  text-center" style="margin-left:35%;width:500px;">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li style="list-style-type: none;">{{ $error }}</li>
             @endforeach
         </ul>
     </div>
