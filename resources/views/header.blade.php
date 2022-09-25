@@ -17,12 +17,15 @@
             border: 1px solid #ddd !important;
 
         }
+        .main {
+            height: calc(100vh - 100px);
+        }
     </style>
 </head>
 
-<body style="font-size:28px;">
+<body style="font-size:28px;" class="main">
 
-    <nav class="navbar navbar-default" >
+    <nav class="navbar navbar-default" style="background: #ADD8E6;">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -47,7 +50,7 @@
                         <div class="col-5 d-flex form-group text-center mb-3">
                             <input type="search" style="font-size:25px;" name="search" class="form-control"
                                 placeholder="Search">
-                                <button type="submit" class="btn btn-default">Search</button>
+                                <button type="submit" class="btn btn-primary px-4 py-0" style="height:40px;font-size:15px;">Submit</button>
                         </div>
                         <div class="col-2">
                             <ul class="nav navbar-nav navbar-right">

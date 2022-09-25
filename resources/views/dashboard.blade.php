@@ -101,6 +101,13 @@
            font-size: 60px;
            line-height: 35px;
         }
+        .form-group {
+            font-size: 18px !important;
+        }
+        .form-control {
+            height: 40px !important;
+            font-size: 18px !important;
+        }
     </style>
 </head>
 
@@ -122,9 +129,9 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <h5 class="modal-title" id="exampleModalLabel">Add New Employee</h5>
+                        <h5 class="modal-title" style="font-size:20px;font-weight:28px;" id="exampleModalLabel">Add New Employee</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true" style="height: 20px; width: 20px">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body popup">
@@ -146,31 +153,31 @@
                                         aria-describedby="emailHelp" name="email" placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email1">Full Name</label>
+                                    <label for="email1">Full name</label>
                                     <input type="text" class="form-control" id="fname"
                                         aria-describedby="emailHelp" name="fname" placeholder="Enter Name">
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="email1">Date Of Joining</label>
+                                    <label for="email1">Date of joining</label>
                                     <input type="date" class="form-control" name="doj" id="doj"
                                         aria-describedby="emailHelp">
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="password1">Date Of Leaving</label>
+                                    <label for="password1">Date of leaving</label>
                                     <input type="date" class="form-control" id="password1" name="dol">
                                 </div>
 
-                                <div class="form-check form-inline">
-                                    <label class="form-check-label"  style="margin-left:-15px;" for="defaultCheck1">
-                                        Still working
+                                <div class="form-check form-inline pl-0">
+                                    <input class="form-check-input mr-2" type="checkbox" name="current_date"
+                                        id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Still working?
                                     </label>
-                                    <input class="form-check-input" type="checkbox" name="current_date"
-                                        id="defaultCheck1" style="margin-left:20px;">
                                 </div>
                                 <div class="form-group form-inline">
-                                    <label for="email1">Upload Image</label>
+                                    <label for="email1">Upload image</label>
                                     <input type="file" class="file" class="form-control" id="email"
                                         name="image" aria-describedby="emailHelp">
                                 </div>
@@ -187,7 +194,7 @@
         </div>
 
         <table class="table table-bordered" id="table">
-            <tr>
+            <tr class="text-center">
                 <th>Avatar</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -195,8 +202,8 @@
                 <th>Action</th>
             </tr>
             @foreach ($employees as $employee)
-                <tr>
-                    <td>
+                <tr class="text-center">
+                    <td >
                         @if (isset($employee['image_path']))
                             <img style="border-radius: 50%;height:40px;width:40px;"
                                 src={{ URL::asset("/images/{$employee['image_path']}") }} alt="Avatar">
@@ -232,7 +239,7 @@
                     </td>
                     <td>
                         <button type="submit" class="btn remove-btn" data-toggle="modal" data-target="#exampleModalCenter"
-                            data-backdrop="static" data-keyboard="false" value="{{ $employee['id'] }}"
+                           style="background:#ADD8E6;" data-backdrop="static" data-keyboard="false" value="{{ $employee['id'] }}"
                             onclick="getID(this.value)">Remove
                         </button>
 
