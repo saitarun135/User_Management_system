@@ -1,4 +1,4 @@
-<p align="center"> <img src="https://github.com/saitarun135/user_management_system/blob/master/public/dashboard.png" height="200" width="560" /></p> 
+<p align="center"> <img src="https://github.com/saitarun135/user_management_system/blob/master/public/dashboard.png" height="500" width="900" /></p> 
 
 ## About UserManagement
 
