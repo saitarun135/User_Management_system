@@ -49,7 +49,7 @@
                     <div class="row justify-content-end">
                         <div class="col-5 d-flex form-group text-center mb-3">
                             <input type="search" style="font-size:25px;" name="search" class="form-control"
-                                placeholder="Search">
+                                 value="<?php echo request()->search;?>">
                                 <button type="submit" class="btn btn-primary px-4 py-0" style="height:40px;font-size:15px;">Submit</button>
                         </div>
                         <div class="col-2">
